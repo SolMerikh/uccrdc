@@ -526,13 +526,50 @@ $csrf = csrf_token();
                     </div>
 
                     <div class="col-lg-6">
-                      <label class="form-label fw-semibold">Frequency</label>
-                      <input class="form-control" type="text" name="frequency" value="<?= htmlspecialchars((string)($createOld['frequency'] ?? '')) ?>" required>
-                    </div>
-                    <div class="col-lg-6">
-                      <label class="form-label fw-semibold">Language</label>
-                      <input class="form-control" type="text" name="language" value="<?= htmlspecialchars((string)($createOld['language'] ?? '')) ?>" required>
-                    </div>
+  <label class="form-label fw-semibold">Frequency <span class="text-danger">*</span></label>
+  <select class="form-select" name="frequency" required>
+    <option value="">Select Frequency</option>
+
+    <?php
+    $frequencies = [
+      "Weekly","Biweekly","Monthly","Bi-Monthly","Semi-annual","Bi-annual",
+      "Triannual","Semi-quarterly","Quarterly","Annually","Biennial",
+      "Triennial","Quadrennial","Quinquennial","Sexennial","Septennial",
+      "Octennial","Novennial","Decennial","Semestral"
+    ];
+    $selectedFrequency = $createOld['frequency'] ?? '';
+    foreach ($frequencies as $freq):
+    ?>
+      <option value="<?= $freq ?>" <?= $selectedFrequency === $freq ? 'selected' : '' ?>>
+        <?= $freq ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+</div>
+
+<div class="col-lg-6">
+  <label class="form-label fw-semibold">Language <span class="text-danger">*</span></label>
+  <select class="form-select" name="language" required>
+    <option value="">Select Language</option>
+
+    <?php
+    $languages = [
+      "English","Filipino","Spanish","Chinese","Mandarin","Japanese","Korean",
+      "Arabic","French","German","Portuguese","Russian","Italian","Hindi",
+      "Bengali","Punjabi","Urdu","Turkish","Vietnamese","Thai","Indonesian",
+      "Malay","Dutch","Greek","Hebrew","Swedish","Norwegian","Danish",
+      "Finnish","Polish","Czech","Hungarian","Romanian","Ukrainian",
+      "Persian","Swahili","Tamil","Telugu","Marathi"
+    ];
+    $selectedLanguage = $createOld['language'] ?? '';
+    foreach ($languages as $lang):
+    ?>
+      <option value="<?= $lang ?>" <?= $selectedLanguage === $lang ? 'selected' : '' ?>>
+        <?= $lang ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+</div>
 
                     <div class="col-12">
                       <label class="form-label fw-semibold">Form of Publication</label>
